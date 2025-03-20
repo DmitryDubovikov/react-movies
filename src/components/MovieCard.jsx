@@ -1,5 +1,5 @@
 
-function MovieCard({movie}) {
+function MovieCard({ movie }) {
 
     function handleFavorite(movie) {
         console.log("Favorite movie", movie);
@@ -10,9 +10,9 @@ function MovieCard({movie}) {
             <div className="movie-poster">
                 <img src={movie.url} alt={movie.title} />
                 <div className="movie-overlay">
-                <button className="favorite-btn" onClick={() => handleFavorite(movie)}>Like
-                    👍
-                </button>
+                    <button className="favorite-btn" onClick={() => handleFavorite(movie)}>Like
+                        👍
+                    </button>
                 </div>
             </div>
             <div className="movie-info">
