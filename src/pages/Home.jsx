@@ -29,6 +29,7 @@ function Home() {
     const handleSubmit = (e) => {
         e.preventDefault();
         alert(search);
+        setSearch("");
     }
 
     return (
