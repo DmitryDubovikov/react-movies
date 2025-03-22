@@ -1,31 +1,28 @@
 import MovieCard from "../components/MovieCard";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import '../css/Home.css'
+import { searchMovie, getPoplularMovies } from '../services/api'
 
 function Home() {
     const [search, setSearch] = useState("");
+    const [movies, setMovies] = useState([]);
+    const [error, setError] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
 
-    const movies = [
-        {
-            id: 1,
-            title: "The Shawshank Redemption",
-            url: "https://en.wikipedia.org/wiki/File:ShawshankRedemptionMoviePoster.jpg",
-            releaseDate: "1994",
-        },
-        {
-            id: 2,
-            title: "The Godfather",
-            url: "https://en.wikipedia.org/wiki/File:ShawshankRedemptionMoviePoster.jpg",
-            releaseDate: "1995",
-        },
-        {
-            id: 3,
-            title: "The Dark Knight",
-            url: "https://en.wikipedia.org/wiki/File:ShawshankRedemptionMoviePoster.jpg",
-            releaseDate: "1996",
-        },
-
-    ]
+    useEffect(() => {
+        const fetchMovies = async () => {
+            try {
+                const data = await getPoplularMovies();
+                setMovies(data);
+            } catch (error) {
+                setError(error);
+                console.error("Error fetching movies:", error);
+            } finally {
+                setIsLoading(false);
+            }
+        }
+        fetchMovies();
+    }, []);
 
     const handleSubmit = (e) => {
         e.preventDefault();
